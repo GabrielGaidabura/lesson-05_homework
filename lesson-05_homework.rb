@@ -6,10 +6,8 @@ class Line
 		@color = "black"
 	end
 
-	def drow_to_svg (file_name)
-		File.open(file_name, 'a') do |f|
-		  f.write("<line x1=\"#{@x1}\" y1=\"#{@y1}\" x2=\"#{@x2}\" y2=\"#{@y2}\" style = \"stroke-width: #{@w}; stroke: black;\" /> \n")
-		end
+	def drow
+		"<line x1=\"#{@x1}\" y1=\"#{@y1}\" x2=\"#{@x2}\" y2=\"#{@y2}\" style = \"stroke-width: #{@w}; stroke: black;\" /> \n"
 	end
 end
 
@@ -19,10 +17,8 @@ class Rect
 	def initialize(x,y,w,h)
 		@x, @y, @w, @h = x, y, w, h
 	end
-	def drow_to_svg (file_name)
-		File.open(file_name, 'a') do |f|
-			f.write("<rect x=\"#{@x}\" y=\"#{@y}\" width=\"#{@w}\" height=\"#{@h}\" /> \n")
-		end
+	def drow
+		"<rect x=\"#{@x}\" y=\"#{@y}\" width=\"#{@w}\" height=\"#{@h}\" /> \n"
 	end
 end
 
@@ -32,10 +28,8 @@ class Circle
 		@cx, @cy, @r, @fill, @stroke = cx,cy,r,fill,stroke
 	end
 	
-	def drow_to_svg (file_name)
-		File.open(file_name, 'a') do |f|
-			f.write("<circle cx=\"#{@cx}\" cy=\"#{@cy}\" r=\"#{@r}\" fill=\"#{@fill}\" stroke=\"black\" stroke-width=\"2\"/> \n")
-		end
+	def drow
+		"<circle cx=\"#{@cx}\" cy=\"#{@cy}\" r=\"#{@r}\" fill=\"#{@fill}\" stroke=\"black\" stroke-width=\"2\"/> \n"
 	end
 end
 
@@ -51,26 +45,22 @@ class Arrow
 		@fill = "yellow"
 	end
 
-	def drow_to_svg (file_name)
-		File.open(file_name, 'a') do |f|
-			f.write("<line x1=\"#{@x1}\" y1=\"#{@y1}\" x2=\"#{@x2}\" y2=\"#{@y2}\" style = \"stroke-width: #{@w}; stroke: black;\" /> \n")
-		end
-		File.open(file_name, 'a') do |f|
-			f.write("<circle cx=\"#{@cx}\" cy=\"#{@cy}\" r=\"#{@r}\" fill=\"#{@fill}\" /> \n")
-		end
+	def drow
+		"<line x1=\"#{@x1}\" y1=\"#{@y1}\" x2=\"#{@x2}\" y2=\"#{@y2}\" style = \"stroke-width: #{@w}; stroke: black;\" /> \n<circle cx=\"#{@cx}\" cy=\"#{@cy}\" r=\"#{@r}\" fill=\"#{@fill}\" /> \n"
 	end
 end
 
 def Drow_array_to_svg(array, file_name)
-	head_line = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?> \n
-	<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"300\" height=\"300\"> \n"
+	head_line = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?> \n<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"300\" height=\"300\"> \n"
 	end_line = "</svg>"
 	
 	File.open(file_name, 'a') do |f|
 		f.write(head_line)
 	end
 	array.each do |el|
-		el.drow_to_svg(file_name)
+		File.open(file_name, 'a') do |f|
+			f.write(el.drow)
+		end
 	end
 	File.open(file_name, 'a') do |f|
 		f.write(end_line)
