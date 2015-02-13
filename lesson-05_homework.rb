@@ -29,7 +29,7 @@ class Circle
 	end
 	
 	def drow
-		"<circle cx=\"#{@cx}\" cy=\"#{@cy}\" r=\"#{@r}\" fill=\"#{@fill}\" stroke=\"black\" stroke-width=\"2\"/> \n"
+		"<circle cx=\"#{@cx}\" cy=\"#{@cy}\" r=\"#{@r}\" fill=\"#{@fill}\" stroke=\"black\" stroke-width=\"2\" /> \n"
 	end
 end
 
