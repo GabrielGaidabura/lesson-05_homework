@@ -6,7 +6,7 @@ class Line
 		@color = "black"
 	end
 
-	def drow
+	def draw
 		"<line x1=\"#{@x1}\" y1=\"#{@y1}\" x2=\"#{@x2}\" y2=\"#{@y2}\" style = \"stroke-width: #{@w}; stroke: black;\" /> \n"
 	end
 end
@@ -17,7 +17,7 @@ class Rect
 	def initialize(x,y,w,h)
 		@x, @y, @w, @h = x, y, w, h
 	end
-	def drow
+	def draw
 		"<rect x=\"#{@x}\" y=\"#{@y}\" width=\"#{@w}\" height=\"#{@h}\" /> \n"
 	end
 end
@@ -28,7 +28,7 @@ class Circle
 		@cx, @cy, @r, @fill, @stroke = cx,cy,r,fill,stroke
 	end
 	
-	def drow
+	def draw
 		"<circle cx=\"#{@cx}\" cy=\"#{@cy}\" r=\"#{@r}\" fill=\"#{@fill}\" stroke=\"black\" stroke-width=\"2\" /> \n"
 	end
 end
@@ -45,12 +45,12 @@ class Arrow
 		@fill = "yellow"
 	end
 
-	def drow
+	def draw
 		"<line x1=\"#{@x1}\" y1=\"#{@y1}\" x2=\"#{@x2}\" y2=\"#{@y2}\" style = \"stroke-width: #{@w}; stroke: black;\" /> \n<circle cx=\"#{@cx}\" cy=\"#{@cy}\" r=\"#{@r}\" fill=\"#{@fill}\" /> \n"
 	end
 end
 
-def Drow_array_to_svg(array, file_name)
+def Draw_array_to_svg(array, file_name)
 	head_line = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?> \n<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"300\" height=\"300\"> \n"
 	end_line = "</svg>"
 	
@@ -59,7 +59,7 @@ def Drow_array_to_svg(array, file_name)
 	end
 	array.each do |el|
 		File.open(file_name, 'a') do |f|
-			f.write(el.drow)
+			f.write(el.draw)
 		end
 	end
 	File.open(file_name, 'a') do |f|
@@ -116,4 +116,4 @@ elements = [
   Arrow.new(50, 250, 75, 240)
 ]
 
-Drow_array_to_svg(elements, 'svg_test.svg')
+Draw_array_to_svg(elements, 'svg_test.svg')
